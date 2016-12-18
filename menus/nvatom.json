@@ -1,26 +1,30 @@
 {
-  "context-menu": {
-    "atom-text-editor": [
-      {
-        "label": "Toggle nvatom",
-        "command": "nvatom:toggle"
-      }
-    ]
-  },
-  "menu": [
-    {
-      "label": "Packages",
-      "submenu": [
-        {
-          "label": "nvatom",
-          "submenu": [
+    "context-menu": {
+        "atom-text-editor": [
             {
-              "label": "Toggle",
-              "command": "nvatom:toggle"
+                "label": "Toggle nvatom",
+                "command": "nvatom:toggle"
             }
-          ]
+        ]
+    },
+    "menu": [
+        {
+            "label": "Packages",
+            "submenu": [
+                {
+                    "label": "nvatom",
+                    "submenu": [
+                        {
+                            "label": "Toggle",
+                            "command": "nvatom:toggle"
+                        },
+                        {
+                            "label": "Open Interlink",
+                            "command": "nvatom:openInterlink"
+                        }
+                    ]
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
