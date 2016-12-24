@@ -1,73 +1,60 @@
-// 'use babel';
-//
-// import Nvatom from '../lib/nvatom';
-//
-// // Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
-// //
-// // To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
-// // or `fdescribe`). Remove the `f` to unfocus the block.
-//
-// describe('Nvatom', () => {
-//   let workspaceElement, activationPromise;
-//
-//   beforeEach(() => {
-//     workspaceElement = atom.views.getView(atom.workspace);
-//     activationPromise = atom.packages.activatePackage('nvatom');
-//   });
-//
-//   describe('when the nvatom:toggle event is triggered', () => {
-//     it('hides and shows the modal panel', () => {
-//       // Before the activation event the view is not on the DOM, and no panel
-//       // has been created
-//       expect(workspaceElement.querySelector('.nvatom')).not.toExist();
-//
-//       // This is an activation event, triggering it will cause the package to be
-//       // activated.
-//       atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
-//
-//       waitsForPromise(() => {
-//         return activationPromise;
-//       });
-//
-//       runs(() => {
-//         expect(workspaceElement.querySelector('.nvatom')).toExist();
-//
-//         let nvatomElement = workspaceElement.querySelector('.nvatom');
-//         expect(nvatomElement).toExist();
-//
-//         let nvatomPanel = atom.workspace.panelForItem(nvatomElement);
-//         expect(nvatomPanel.isVisible()).toBe(true);
-//         atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
-//         expect(nvatomPanel.isVisible()).toBe(false);
-//       });
-//     });
-//
-//     it('hides and shows the view', () => {
-//       // This test shows you an integration test testing at the view level.
-//
-//       // Attaching the workspaceElement to the DOM is required to allow the
-//       // `toBeVisible()` matchers to work. Anything testing visibility or focus
-//       // requires that the workspaceElement is on the DOM. Tests that attach the
-//       // workspaceElement to the DOM are generally slower than those off DOM.
-//       jasmine.attachToDOM(workspaceElement);
-//
-//       expect(workspaceElement.querySelector('.nvatom')).not.toExist();
-//
-//       // This is an activation event, triggering it causes the package to be
-//       // activated.
-//       atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
-//
-//       waitsForPromise(() => {
-//         return activationPromise;
-//       });
-//
-//       runs(() => {
-//         // Now we can test for view visibility
-//         let nvatomElement = workspaceElement.querySelector('.nvatom');
-//         expect(nvatomElement).toBeVisible();
-//         atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
-//         expect(nvatomElement).not.toBeVisible();
-//       });
-//     });
-//   });
-// });
+'use babel';
+
+import path from 'path';
+import temp from 'temp';
+
+temp.track();
+
+describe("nvAtom", () => {
+    let defaultDirectory = atom.config.get('nvatom.directory');
+    let workspaceElement,
+        activationPromise;
+
+    beforeEach(() => {
+        workspaceElement = atom.views.getView(atom.workspace);
+        activationPromise = atom.packages.activatePackage('nvatom');
+    });
+
+    afterEach(() => {
+        return atom.config.set('nvatom.directory', defaultDirectory);
+    });
+
+        // it("attaches and then detaches the view when the nvatom:toggle event is triggered", () => {
+        //     var noteDirectory = path.join(temp.mkdirSync());
+        //     atom.config.set('nvatom.directory', noteDirectory);
+        //
+        //     expect(workspaceElement.querySelector('.nvatom')).not.toExist();
+        //     atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
+        //
+        //     waitsForPromise(() => {
+        //         return activationPromise;
+        //     });
+        //
+        //     runs(() => {
+        //         expect(workspaceElement.querySelector('.nvatom')).toExist();
+        //         expect(workspaceElement.querySelector('.nvatom').parentNode.style.display).not.toBe('none');
+        //         atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
+        //         expect(workspaceElement.querySelector('.nvatom').parentNode.style.display).toBe('none');
+        //     });
+        // });
+
+        it("checks if we banned the default directory under packages directory when the nvatom:toggle event is triggered", () => {
+            let noteDirectory = path.join(process.env.ATOM_HOME, 'packages', 'nvatom', 'notebook');
+            atom.config.set('nvatom.directory', noteDirectory);
+
+            atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
+
+            waitsForPromise(() => {
+                return Promise.all([
+                    atom.packages.activatePackage('nvatom'),
+                    atom.packages.activatePackage('notifications')
+                ]);
+            });
+
+            runs(() => {
+                let notificationContainer = workspaceElement.querySelector('atom-notifications');
+                let notification = notificationContainer.querySelector('atom-notification.fatal');
+                expect(notification).toExist();
+            });
+        });
+});

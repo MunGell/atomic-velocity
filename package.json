@@ -1,6 +1,6 @@
 {
   "name": "nvatom",
-  "main": "./lib/notational-velocity.js",
+  "main": "./lib/nvatom.js",
   "version": "1.0.0",
   "description": "A short description of your package",
   "keywords": [
