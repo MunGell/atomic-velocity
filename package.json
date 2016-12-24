@@ -1,18 +1,26 @@
 {
   "name": "nvatom",
-  "main": "./lib/nvatom",
-  "version": "0.0.0",
+  "main": "./lib/notational-velocity.js",
+  "version": "1.0.0",
   "description": "A short description of your package",
   "keywords": [
   ],
   "activationCommands": {
     "atom-workspace": "nvatom:toggle"
   },
-  "repository": "https://github.com/atom/nvatom",
+  "repository": "https://github.com/MunGell/nvatom",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-  }
+  "atom-space-pen-views": "^2.0.3",
+  "chokidar": "^1.0.5",
+  "docquery": "^1.1.1",
+  "fs-plus": "2.x",
+  "underscore-plus": "^1.6.6"
+},
+"devDependencies": {
+  "temp": "0.8.1"
+}
 }
