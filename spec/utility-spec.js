@@ -9,8 +9,8 @@ import Utility from '../lib/utility';
 temp.track();
 
 describe("Utility", () => {
-    var defaultNoteDirectory = atom.config.get('nvatom.directory');
-    var defaultNoteExtensions = atom.config.get('nvatom.extensions');
+    let defaultNoteDirectory = atom.config.get('nvatom.directory');
+    let defaultNoteExtensions = atom.config.get('nvatom.extensions');
 
     afterEach(() => {
         atom.config.set('nvatom.directory', defaultNoteDirectory);
@@ -36,7 +36,7 @@ describe("Utility", () => {
     });
 
     it('isNote handles symlinks correctly', () => {
-        var noteDirectoryPath, noteDirectoryPathSymlink, notePath, notePathSymlink, tempDirectoryPath;
+        let noteDirectoryPath, noteDirectoryPathSymlink, notePath, notePathSymlink, tempDirectoryPath;
         atom.config.set('nvatom.extensions', ['.md', '.markdown']);
         tempDirectoryPath = path.join(temp.mkdirSync());
         noteDirectoryPath = path.join(temp.mkdirSync());

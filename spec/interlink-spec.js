@@ -1,7 +1,5 @@
 'use babel';
 
-// @todo: consider using pure fs module
-import fs from 'fs-plus';
 import path from 'path';
 import temp from 'temp';
 import Interlink from '../lib/interlink';
@@ -9,31 +7,31 @@ import Interlink from '../lib/interlink';
 temp.track();
 
 describe('Interlink', () => {
-    var interLinkInstance;
-    var defaultDirectory = atom.config.get('nvatom.directory');
-    var noteDirectory = null;
+    let interLinkInstance;
+    let defaultDirectory = atom.config.get('nvatom.directory');
+    let noteDirectory = null;
 
-    var activationPromise;
-    var openFilePromise;
-    var workspaceElement;
-    var editor;
+    let activationPromise;
+    let openFilePromise;
+    let workspaceElement;
+    let editor;
 
-    beforeEach(function () {
+    beforeEach(() => {
         workspaceElement = atom.views.getView(atom.workspace);
         noteDirectory = temp.mkdirSync();
         activationPromise = atom.packages.activatePackage('nvatom');
         openFilePromise = atom.workspace.open(path.join(noteDirectory, 'Interlink.md'))
-            .then(function (o) {
+            .then(o => {
                 return editor = o;
             });
         atom.config.set('nvatom.directory', noteDirectory);
     });
 
-    afterEach(function () {
+    afterEach(() => {
         return atom.config.set('nvatom.directory', defaultDirectory);
     });
 
-    it('returns a trimmed interlink text', function () {
+    it('returns a trimmed interlink text', () => {
         let testdata = [
             {
                 position: [0, 2],
@@ -84,7 +82,7 @@ describe('Interlink', () => {
         });
     });
 
-    it('returns undefined for invalid text', function () {
+    it('returns undefined for invalid text', () => {
         let testdata = [
             {
                 position: [0, 2],
@@ -190,7 +188,7 @@ describe('Interlink', () => {
         });
     });
 
-    it('does nothing when the editor path is not under the note directory', function () {
+    it('does nothing when the editor path is not under the note directory', () => {
         atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
 
         waitsForPromise(() => {

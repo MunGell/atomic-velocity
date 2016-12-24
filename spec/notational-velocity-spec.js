@@ -6,8 +6,8 @@ import temp from 'temp';
 temp.track();
 
 describe("nvAtom", () => {
-    var defaultDirectory = atom.config.get('nvatom.directory');
-    var workspaceElement,
+    let defaultDirectory = atom.config.get('nvatom.directory');
+    let workspaceElement,
         activationPromise;
 
     beforeEach(() => {
@@ -39,7 +39,7 @@ describe("nvAtom", () => {
         // });
 
         it("checks if we banned the default directory under packages directory when the nvatom:toggle event is triggered", () => {
-            var noteDirectory = path.join(process.env.ATOM_HOME, 'packages', 'nvatom', 'notebook');
+            let noteDirectory = path.join(process.env.ATOM_HOME, 'packages', 'nvatom', 'notebook');
             atom.config.set('nvatom.directory', noteDirectory);
 
             atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
@@ -52,8 +52,8 @@ describe("nvAtom", () => {
             });
 
             runs(() => {
-                var notificationContainer = workspaceElement.querySelector('atom-notifications');
-                var notification = notificationContainer.querySelector('atom-notification.fatal');
+                let notificationContainer = workspaceElement.querySelector('atom-notifications');
+                let notification = notificationContainer.querySelector('atom-notification.fatal');
                 expect(notification).toExist();
             });
         });
