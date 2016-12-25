@@ -1,6 +1,6 @@
 {
-    "name": "nvAtom Github Markdown",
-    "scopeName": "source.gfm.nvatom",
+    "name": "Atomic Velocity Github Markdown",
+    "scopeName": "source.gfm.atomic-velocity",
     "patterns": [
         {
             "include": "source.gfm"

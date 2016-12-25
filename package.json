@@ -1,14 +1,14 @@
 {
-  "name": "nvatom",
-  "main": "./lib/nvatom.js",
+  "name": "atomic-velocity",
+  "main": "./lib/atomic-velocity.js",
   "version": "1.0.0",
   "description": "A short description of your package",
   "keywords": [
   ],
   "activationCommands": {
-    "atom-workspace": "nvatom:toggle"
+    "atom-workspace": "atomic-velocity:toggle"
   },
-  "repository": "https://github.com/MunGell/nvatom",
+  "repository": "https://github.com/MunGell/atomic-velocity",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"

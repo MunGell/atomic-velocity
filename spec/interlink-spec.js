@@ -8,7 +8,7 @@ temp.track();
 
 describe('Interlink', () => {
     let interLinkInstance;
-    let defaultDirectory = atom.config.get('nvatom.directory');
+    let defaultDirectory = atom.config.get('atomic-velocity.directory');
     let noteDirectory = null;
 
     let activationPromise;
@@ -19,16 +19,16 @@ describe('Interlink', () => {
     beforeEach(() => {
         workspaceElement = atom.views.getView(atom.workspace);
         noteDirectory = temp.mkdirSync();
-        activationPromise = atom.packages.activatePackage('nvatom');
+        activationPromise = atom.packages.activatePackage('atomic-velocity');
         openFilePromise = atom.workspace.open(path.join(noteDirectory, 'Interlink.md'))
             .then(o => {
                 return editor = o;
             });
-        atom.config.set('nvatom.directory', noteDirectory);
+        atom.config.set('atomic-velocity.directory', noteDirectory);
     });
 
     afterEach(() => {
-        return atom.config.set('nvatom.directory', defaultDirectory);
+        return atom.config.set('atomic-velocity.directory', defaultDirectory);
     });
 
     it('returns a trimmed interlink text', () => {
@@ -60,7 +60,7 @@ describe('Interlink', () => {
             }
         ];
 
-        atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
+        atom.commands.dispatch(workspaceElement, 'atomic-velocity:toggle');
 
         waitsForPromise(() => {
             return Promise.all([
@@ -118,7 +118,7 @@ describe('Interlink', () => {
             }
         ];
 
-        atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
+        atom.commands.dispatch(workspaceElement, 'atomic-velocity:toggle');
 
         waitsForPromise(() => {
             return Promise.all([
@@ -141,7 +141,7 @@ describe('Interlink', () => {
     });
 
     it('does not apply the grammar under random directory', () => {
-        atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
+        atom.commands.dispatch(workspaceElement, 'atomic-velocity:toggle');
 
         waitsForPromise(() => {
             let openRandomFilePromise = atom.workspace.open(path.join(temp.mkdirSync(), 'Interlink.md'))
@@ -165,7 +165,7 @@ describe('Interlink', () => {
     });
 
     it('opens the referred notes when the editor path is under the note directory', () => {
-        atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
+        atom.commands.dispatch(workspaceElement, 'atomic-velocity:toggle');
 
         waitsForPromise(() => {
             return Promise.all([
@@ -189,7 +189,7 @@ describe('Interlink', () => {
     });
 
     it('does nothing when the editor path is not under the note directory', () => {
-        atom.commands.dispatch(workspaceElement, 'nvatom:toggle');
+        atom.commands.dispatch(workspaceElement, 'atomic-velocity:toggle');
 
         waitsForPromise(() => {
             let openRandomFilePromise = atom.workspace.open(path.join(temp.mkdirSync(), 'Interlink.md'))

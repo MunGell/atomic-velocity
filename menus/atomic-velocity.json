@@ -2,8 +2,8 @@
     "context-menu": {
         "atom-text-editor": [
             {
-                "label": "Toggle nvatom",
-                "command": "nvatom:toggle"
+                "label": "Toggle Atomic Velocity",
+                "command": "atomic-velocity:toggle"
             }
         ]
     },
@@ -12,15 +12,15 @@
             "label": "Packages",
             "submenu": [
                 {
-                    "label": "nvatom",
+                    "label": "atomic-velocity",
                     "submenu": [
                         {
                             "label": "Toggle",
-                            "command": "nvatom:toggle"
+                            "command": "atomic-velocity:toggle"
                         },
                         {
                             "label": "Open Interlink",
-                            "command": "nvatom:openInterlink"
+                            "command": "atomic-velocity:openInterlink"
                         }
                     ]
                 }
