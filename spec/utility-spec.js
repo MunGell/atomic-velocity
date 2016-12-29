@@ -16,15 +16,6 @@ describe("Utility", () => {
         atom.config.set('atomic-velocity.extensions', defaultNoteExtensions);
     });
 
-    it('trim', () => {
-        expect(Utility.trim(null)).toBe(void 0);
-        expect(Utility.trim(void 0)).toBe(void 0);
-        expect(Utility.trim('')).toBe('');
-        expect(Utility.trim('  ')).toBe('');
-        expect(Utility.trim('  hello world  ')).toBe('hello world');
-        expect(Utility.trim('  hello world\t\n\r  ')).toBe('hello world');
-    });
-
     it('getPrimaryNoteExtension', () => {
         atom.config.set('atomic-velocity.extensions', ['.md', '.markdown']);
         expect(Utility.getPrimaryNoteExtension()).toBe('.md');
