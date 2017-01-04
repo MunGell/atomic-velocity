@@ -7,7 +7,7 @@ import Utility from '../lib/utility';
 
 temp.track();
 
-describe("Utility", () => {
+describe('Utility', () => {
     let defaultNoteDirectory = atom.config.get('atomic-velocity.directory');
     let defaultNoteExtensions = atom.config.get('atomic-velocity.extensions');
 
