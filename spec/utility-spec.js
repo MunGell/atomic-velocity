@@ -45,4 +45,30 @@ describe('Utility', () => {
         expect(Utility.isNote(notePath)).toBe(true);
         expect(Utility.isNote(notePathSymlink)).toBe(true);
     });
+
+    describe('isNoteFileExtension', () => {
+        it('returns true when file extension is in configuration', () => {
+            atom.config.set('atomic-velocity.extensions', ['.test']);
+            expect(Utility.isNoteFileExtension('/Users/Home/Note.test')).toBe(true);
+        });
+
+        it('returns true when file extensions are NOT configured and default to Markdown', () => {
+            atom.config.set('atomic-velocity.extensions', []);
+            expect(Utility.isNoteFileExtension('/Users/Home/Note.md')).toBe(true);
+        });
+
+        it('returns false when configuration is not set', () => {
+            expect(Utility.isNoteFileExtension('/Users/Home/Note.md')).toBe(false);
+        });
+
+        it('returns false when file extension is not in the config', () => {
+            atom.config.set('atomic-velocity.extensions', ['.club']);
+            expect(Utility.isNoteFileExtension('/Users/Home/Note.md')).toBe(false);
+        });
+
+        it('returns false when configuration is empty and file extension is not the default one', () => {
+            atom.config.set('atomic-velocity.extensions', []);
+            expect(Utility.isNoteFileExtension('/Users/Home/Note.test')).toBe(false);
+        });
+    });
 });
