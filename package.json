@@ -1,26 +1,25 @@
 {
-  "name": "atomic-velocity",
-  "main": "./lib/atomic-velocity.js",
-  "version": "1.0.0",
-  "description": "A short description of your package",
-  "keywords": [
-  ],
-  "activationCommands": {
-    "atom-workspace": "atomic-velocity:toggle"
-  },
-  "repository": "https://github.com/MunGell/atomic-velocity",
-  "license": "MIT",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
-  },
-  "dependencies": {
-  "atom-space-pen-views": "^2.0.3",
-  "chokidar": "^1.0.5",
-  "docquery": "^1.1.1",
-  "fs-plus": "2.x",
-  "underscore-plus": "^1.6.6"
-},
-"devDependencies": {
-  "temp": "0.8.1"
-}
+    "name": "atomic-velocity",
+    "main": "./lib/atomic-velocity.js",
+    "version": "0.0.0",
+    "description": "A Notational Velocity package for Atom",
+    "keywords": [
+    ],
+    "activationCommands": {
+        "atom-workspace": "atomic-velocity:toggle"
+    },
+    "repository": "https://github.com/MunGell/atomic-velocity",
+    "license": "MIT",
+    "engines": {
+        "atom": ">=1.0.0 <2.0.0"
+    },
+    "dependencies": {
+        "atom-space-pen-views": "^2.0.3",
+        "docquery": "^1.1.1",
+        "fs-plus": "2.x",
+        "underscore-plus": "^1.6.6"
+    },
+    "devDependencies": {
+        "temp": "0.8.1"
+    }
 }
