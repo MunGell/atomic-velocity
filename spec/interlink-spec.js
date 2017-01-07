@@ -8,7 +8,6 @@ temp.track();
 
 describe('Interlink', () => {
     let interLinkInstance;
-    let defaultDirectory = atom.config.get('atomic-velocity.directory');
     let noteDirectory = null;
 
     let activationPromise;
@@ -25,10 +24,6 @@ describe('Interlink', () => {
                 return editor = o;
             });
         atom.config.set('atomic-velocity.directory', noteDirectory);
-    });
-
-    afterEach(() => {
-        return atom.config.set('atomic-velocity.directory', defaultDirectory);
     });
 
     it('returns a trimmed interlink text', () => {

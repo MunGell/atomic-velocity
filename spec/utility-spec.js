@@ -71,4 +71,41 @@ describe('Utility', () => {
             expect(Utility.isNoteFileExtension('/Users/Home/Note.test')).toBe(false);
         });
     });
+
+    describe('isNotePath', () => {
+        it('returns true when file is in notes directory', () => {
+            let tempDir = temp.mkdirSync();
+            let filePath = path.join(tempDir, 'Notes/Note.test');
+            let notesDir = path.join(tempDir, 'Notes');
+
+            fs.mkdirSync(notesDir);
+            fs.writeFileSync(filePath, 'test');
+
+            expect(Utility.isNotePath(filePath, notesDir)).toBe(true);
+        });
+
+        it('returns true when file is in notes directory after file path normalization', () => {
+            let tempDir = temp.mkdirSync();
+            let filePath = path.join(tempDir, 'Notes/Test/../Note.test');
+            let notesDir = path.join(tempDir, 'Notes');
+
+            let realFilePath = path.join(tempDir, 'Notes/Note.test');
+
+            fs.mkdirSync(notesDir);
+            fs.writeFileSync(realFilePath, 'test');
+
+            expect(Utility.isNotePath(filePath, notesDir)).toBe(true);
+        });
+
+        it('returns true when file is in notes directory after notes directory normalization', () => {
+            let tempDir = temp.mkdirSync();
+            let filePath = path.join(tempDir, 'Notes/Note.test');
+            let notesDir = path.join(tempDir, 'Notes/Test/../');
+
+            fs.mkdirSync(path.join(tempDir, 'Notes'));
+            fs.writeFileSync(filePath, 'test');
+
+            expect(Utility.isNotePath(filePath, notesDir)).toBe(true);
+        });
+    });
 });
